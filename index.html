@@ -3,20 +3,92 @@
 
 <head>
     <title>โปรแกรมวัดค่าดัชนีมวลกาย</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 45%;
+        }
+
+        td,
+        th {
+            border: 1px solid #ffffff;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
 </head>
 
-<body>
+<body style="background-color:rgb(99, 126, 201);">
     <center>
-        <h1>โปรแกรมวัดค่าดัชนีมวลกาย(BMI)</h1>
-        <h3>การหาค่าดัชนีมวลกาย (Body Mass Index : BMI) คือเป็นมาตรการที่ใช้ประเมินภาวะอ้วน<br>และผอมในผู้ใหญ่
+        <h1 style="color:whitesmoke;">โปรแกรมวัดค่าดัชนีมวลกาย(BMI)</h1>
+        <p style="color:whitesmoke;">การหาค่าดัชนีมวลกาย (Body Mass Index : BMI)
+            คือเป็นมาตรการที่ใช้ประเมินภาวะอ้วน<br>และผอมในผู้ใหญ่
             ตั้งแต่อายุ 25 ปีขึ้นไป สามารถทำได้โดยการชั่งน้ำหนักตัวเป็นกิโลกรัม<br> และวัดส่วนสูงเป็นเซนติเมตร
             แล้วนำมาหาดัชมีมวลกาย โดยใช้โปรแกรมวัดค่าความอ้วน<br>ข้างต้น<br><br>
 
             Note. ทฤษฎี การประเมินระดับความอ้วนด้วยสูตรคำนวน BMI เป็นการประเมินจากค่าเฉลี่ย<br>เชิงสถิติ
             ผลการคำนวณที่ได้อาจคลาดเคลื่อนจากความเป็นจริง โดยเฉพาะผู้ที่ออกกำลัง<br>กายเป็นประจำ
-            หรือกลุ่มนักเพาะกายที่มีปริมาณกล้ามเนื้อสูง</h3>
-        <img src="BMI.jpg" height="378" width="622">
+            หรือกลุ่มนักเพาะกายที่มีปริมาณกล้ามเนื้อสูง</p><br><br>
+        <div class="b-form">
+            <div class="field-block">
+                <laber for="field-mass">น้ำหนักตัว(kg.)</laber>
+                <input type="number" name="mass" placeholder id="field-mass" class="field-text">
+            </div>
+            <div class="field-block">
+                <laber for="field-height">ส่วนสูง(m.)</laber>
+                <input type="number" name="height" placeholder id="field-height" class="field-text">
+            </div>
+            <div class="b-btn">
+                <button onclick="BMI(document.getElementById('field-mass').value,document.getElementById('field-height').value)">Calculate</button>
+            </div>
+            <div class="b-cal-result bmi-result">
+                <div class="inner">
+                    <p class="result-text">BMI</p>
+                    <p class="bmi-value result-value" data-bmi="0" id="result">0</p>
+                </div>
+            </div>
+        </div>
+            <h2 style="color:whitesmoke;">ตารางเทียบค่า BMI</h2>
+
+            <table>
+                <tr>
+                    <th style="background-color: #cfcbcb;">BMI kg/m<sup>2</sup></th>
+                    <th style="background-color: #cfcbcb;">อยู่ในเกณฑ์</th>
+                    <th style="background-color: #cfcbcb;">ภาวะเสี่ยงต่อโรค</th>
+                </tr>
+                <tr>
+                    <td style="background-color: #144904;">น้อยกว่า 18.50</td>
+                    <td style="background-color: #144904;">น้ำหนักต่ำกว่าเกณฑ์</td>
+                    <td style="background-color: #144904;">มีความเสี่ยงเกิดโรคขาดสารอาหาร</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #0da12d;">ระหว่าง 18.50 - 22.90</td>
+                    <td style="background-color: #0da12d;">น้ำหนักสมส่วน</td>
+                    <td style="background-color: #0da12d;">โอกาสการเกิดโรคแทรกซ้อน น้อยที่สุด</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #f4f74f;">ระหว่าง 23 - 24.90</td>
+                    <td style="background-color: #f4f74f;">น้ำหนักเกินมาตรฐาน</td>
+                    <td style="background-color: #f4f74f;">ภาวะน้ำหนักเกินระยะเริ่มต้น เริ่มมีโรคแทรกซ้อนเล็กน้อย</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #f89320;">ระหว่าง 25 - 29.90</td>
+                    <td style="background-color: #f89320;">อ้วน</td>
+                    <td style="background-color: #f89320;">ภาวะน้ำหนักเกินมาก มีโรคแทรกซ้อนในระยะอ้วนเริ่มต้น</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #f84020;">มากกว่า 30</td>
+                    <td style="background-color: #f84020;">อ้วนมาก</td>
+                    <td style="background-color: #f84020;">ภาวะน้ำหนักเกินมากที่สุดโอกาสการเกิดโรคแทรกซ้อนอย่าง โรคอ้วน</td>
+                </tr>
+            </table>
     </center>
+    <script src="App.js"></script>
 </body>
 
 </html>
